@@ -47,7 +47,7 @@ public class UserListServiceImpl implements UserListService {
     @Override
     public boolean checkFilmStatus(Movie movie,String username) {
         boolean isPresent = true;
-        if (!repository.checkStatus(movie,username)) {
+        if (!repository.checkStatus(movie,username).isEmpty()) {
             addMovieToFavList(movie, username);
             isPresent = false;
         }

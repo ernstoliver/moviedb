@@ -28,15 +28,11 @@ public class UserListRepositoryImpl implements UserListRepository {
     }
 
     @Override
-    public boolean checkStatus(Movie movie, String username) {
-        boolean isPresent = true;
+    public List<Object[]> checkStatus(Movie movie, String username) {
         Query query = manager.createNativeQuery("select movie.tmdbid from public.movie inner join public.user_favourite on movie.id = user_favourite.movie_id inner join public.app_user on app_user.id = user_favourite.user_id where movie.tmdbid = ? and app_user.username = ?;");
         query.setParameter(1, movie.getTmdbId());
         query.setParameter(2, username);
-        if (query.getResultList().isEmpty()) {
-            isPresent = false;
-        }
-        return isPresent;
+        return query.getResultList();
     }
 
     @Override
