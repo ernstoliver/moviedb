@@ -41,7 +41,6 @@ public class DetailSearchProcess implements MovieSearchDetail {
     public Movie returnMovie(String json) {
         try {
             ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            //budget,genres[name],id,imdb_id,overview,poster_path,release_date,revenue,runtime,tagline,title,images{posters[]},videos{results[0].key}
             
             JsonNode jsonNodeRoot = objectMapper.readTree(json);
             Movie movie = new Movie();

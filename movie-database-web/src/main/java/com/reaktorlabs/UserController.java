@@ -29,7 +29,6 @@ public class UserController {
         this.authentication = authentication;
     }
     
-    //registration
     public String register() {
         if (authentication.findUserInDatabase(this.user.getUserName()).isEmpty()) {
             this.user.setId(1L);
@@ -41,7 +40,6 @@ public class UserController {
         }
     }
     
-    //login button needed
     public String login(User user) {
         if ("ok".equals(authentication.login(user))) {
             return "/mainpage.xhtml";
@@ -50,13 +48,11 @@ public class UserController {
         }  
     }
     
-    //logout button needed
     public void logout(ActionEvent actionEvent) {
         authentication.logout();
         buttonAction(actionEvent);
     }
     
-    //primefaces hintbar
     public void buttonAction(ActionEvent actionEvent) {
         addMessage("Successfully logged out");
     }

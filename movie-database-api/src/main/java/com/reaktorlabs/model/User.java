@@ -28,7 +28,6 @@ public class User implements Serializable {
     @Column(name = "username")
     private String userName;
     private String password;
-    //viewlist,viewedlist,favourites -> userid
     @XmlTransient
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy = "user")
     private List<UserRole> roles = new ArrayList<>();

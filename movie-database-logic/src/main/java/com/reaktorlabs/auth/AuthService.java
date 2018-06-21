@@ -63,14 +63,12 @@ public class AuthService implements Authentication {
             defaultRole.setUser(user);
             registerUserWithRole(user, defaultRole);
         } else {
-            //tell user that this user exists
             throw new IllegalStateException("User already exist: " + user.getUserName());
         }
     }
 
     @Override
     public void registerUserWithRole(User user, UserRole role) {
-        //binding UserRole to User
         final User newUser = new User();
         final String password = user.getPassword();
         final String encryptedPassword = HashUtil.encryptSHA512(password);

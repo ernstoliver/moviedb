@@ -41,7 +41,6 @@ public class ActorSearchImpl implements ActorSearch {
     public List<Actor> returnActors(String json) {
         try {
             ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            //character,name,profile_path
             
             JsonNode jsonNodeRoot = objectMapper.readTree(json);
             List<Actor> actorList = new ArrayList<>();

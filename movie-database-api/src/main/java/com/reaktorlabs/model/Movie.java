@@ -32,16 +32,15 @@ public class Movie implements Serializable {
     private String poster_path;
     private Integer budget;
     @ElementCollection
-    private List<String> genres; //MtM
+    private List<String> genres;
     private String imdb_id;
     private Integer revenue;
-    private Integer runtime; //stats
+    private Integer runtime;
     private String tagline;
     @ElementCollection
-    private List<String> images; //list of images
+    private List<String> images;
     @ElementCollection
-    private List<String> videos; //list if videos
-    //genres,viewlist,viewedlist,favourites,rating
+    private List<String> videos;
     @ManyToMany
     @JoinTable(
         name = "user_favourite", 

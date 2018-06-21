@@ -29,8 +29,6 @@ public class UserListServiceImpl implements UserListService {
 
     @Override
     public void addMovieToFavList(Movie movie,String username) {
-        //save movie object and add to existing user object's list
-        //decide whether the movie is present in db or not
         User newUser = repository.getUserFromDatabase(username);
         if (!repository.getMovieFromDatabase(movie.getTmdbId()).isEmpty()) {
             Movie moviedb = repository.getMovieFromDatabase(movie.getTmdbId()).get(0);
