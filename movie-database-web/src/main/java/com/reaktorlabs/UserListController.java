@@ -23,6 +23,7 @@ public class UserListController implements Serializable {
     private UserListService service;
     private Movie movie;
     private List<Movie> favlist;
+    private Integer rating;
     
     public UserListController() {
         
@@ -35,16 +36,24 @@ public class UserListController implements Serializable {
     
     public void saveToList(Movie movie,ActionEvent actionEvent,HttpServletRequest request) {
         this.movie = movie;
-        if (!service.checkFilmStatus(movie,getLoggedinUserName(request))) {
-            addMessage(actionEvent,"Added to your list");
-        } else {
+        if (service.checkFilmStatus(movie,getLoggedinUserName(request))) {
             addMessage(actionEvent,"This movie is already in your list");
+        } else {
+            addMessage(actionEvent,"Added to your list");
         }
     }
      
     public void addMessage(ActionEvent actionEvent,String text) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, text,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void saveRating(HttpServletRequest request,Long tmdbid) {
+        service.saveUserRating(getLoggedinUserName(request), tmdbid, rating);
+    }
+    
+    public Integer returnRating(HttpServletRequest request,Long tmdbid) {
+        return service.returnUserRating(getLoggedinUserName(request), tmdbid);
     }
     
     public boolean processRequest(HttpServletRequest request) {
@@ -87,7 +96,13 @@ public class UserListController implements Serializable {
     public void setFavlist(List<Movie> favlist) {
         this.favlist = favlist;
     }
-    
-    
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
     
 }

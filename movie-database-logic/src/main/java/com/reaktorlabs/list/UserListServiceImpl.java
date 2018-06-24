@@ -2,6 +2,7 @@ package com.reaktorlabs.list;
 
 import com.reaktorlabs.comparator.FilmTitleComparator;
 import com.reaktorlabs.model.Movie;
+import com.reaktorlabs.model.MovieRating;
 import com.reaktorlabs.model.User;
 import com.reaktorlabs.repository.UserListRepository;
 import java.util.Collections;
@@ -45,7 +46,7 @@ public class UserListServiceImpl implements UserListService {
     @Override
     public boolean checkFilmStatus(Movie movie,String username) {
         boolean isPresent = true;
-        if (!repository.checkStatus(movie,username).isEmpty()) {
+        if (repository.checkStatus(movie,username).isEmpty()) {
             addMovieToFavList(movie, username);
             isPresent = false;
         }
@@ -69,6 +70,26 @@ public class UserListServiceImpl implements UserListService {
         movieToRemoveFrom.getUsers().remove(userToRemoveFrom);
         userToRemoveFrom.getMovies().remove(movieToRemoveFrom);
         System.out.println("remove success, movieid: " + tmdbid);
+    }
+
+    @Override
+    public void saveUserRating(String username, Long tmdbid, Integer rating) {
+        Movie movie = repository.getMovieFromDatabase(tmdbid).get(0);
+        User user = repository.getUserFromDatabase(username);
+        MovieRating movieRating = new MovieRating();
+        movieRating.setApp_user(user);
+        movieRating.setMovie(movie);
+        movieRating.setRating(rating);
+        movie.getRatings().add(movieRating);
+        user.getRatings().add(movieRating);
+        repository.saveRating(movieRating);
+    }
+
+    @Override
+    public Integer returnUserRating(String username, Long tmdbid) {
+        Movie movie = repository.getMovieFromDatabase(tmdbid).get(0);
+        User user = repository.getUserFromDatabase(username);
+        return repository.returnUserRating(user, movie);
     }
     
 }

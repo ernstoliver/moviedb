@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -48,6 +49,8 @@ public class Movie implements Serializable {
         inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
     private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "movie")
+    private List<MovieRating> ratings = new ArrayList<>();
     
     
     public Movie() {
@@ -174,9 +177,17 @@ public class Movie implements Serializable {
         this.users = users;
     }
 
+    public List<MovieRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<MovieRating> ratings) {
+        this.ratings = ratings;
+    }
+
     @Override
     public String toString() {
-        return "Movie{" + "id=" + id + ", title=" + title + ", tmdbId=" + tmdbId + ", release_date=" + release_date + ", overview=" + overview + ", poster_path=" + poster_path + ", budget=" + budget + ", genres=" + genres + ", imdb_id=" + imdb_id + ", revenue=" + revenue + ", runtime=" + runtime + ", tagline=" + tagline + ", images=" + images + ", videos=" + videos + ", users=" + users + '}';
+        return "Movie{" + "id=" + id + ", title=" + title + ", tmdbId=" + tmdbId + ", release_date=" + release_date + ", overview=" + overview + ", poster_path=" + poster_path + ", budget=" + budget + ", genres=" + genres + ", imdb_id=" + imdb_id + ", revenue=" + revenue + ", runtime=" + runtime + ", tagline=" + tagline + ", images=" + images + ", videos=" + videos + ", users=" + users + ", ratings=" + ratings + '}';
     }
     
 }

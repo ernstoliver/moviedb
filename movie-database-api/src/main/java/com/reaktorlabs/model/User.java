@@ -33,6 +33,8 @@ public class User implements Serializable {
     private List<UserRole> roles = new ArrayList<>();
     @ManyToMany(mappedBy = "users")
     private List<Movie> movies = new ArrayList<>();
+    @OneToMany(mappedBy = "app_user")
+    private List<MovieRating> ratings = new ArrayList<>();
 
     
     public User() {
@@ -78,6 +80,13 @@ public class User implements Serializable {
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
+
+    public List<MovieRating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<MovieRating> ratings) {
+        this.ratings = ratings;
+    }
     
 }

@@ -1,6 +1,7 @@
 package com.reaktorlabs.repository;
 
 import com.reaktorlabs.model.Movie;
+import com.reaktorlabs.model.MovieRating;
 import com.reaktorlabs.model.User;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -68,5 +69,23 @@ public class UserListRepositoryImpl implements UserListRepository {
             favlist.add(newMovie);
         }
         return favlist;
+    }
+
+    @Override
+    public void saveRating(MovieRating rating) {
+        manager.merge(rating);
+        System.out.println("completed");
+    }
+
+    @Override
+    public Integer returnUserRating(User user, Movie movie) {
+        TypedQuery<Integer> query = manager.createQuery("SELECT r.rating FROM MovieRating r WHERE r.movie.id = :movieid AND r.app_user.id = :userid",Integer.class);
+        query.setParameter("movieid", movie.getId());
+        query.setParameter("userid", user.getId());
+        if (query.getResultList().isEmpty()) {
+            return null;
+        } else {
+            return query.getResultList().get(0);
+        }
     }
 }

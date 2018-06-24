@@ -15,11 +15,10 @@
             <h:body>
                 <!--movie.id,imdb_id,poster_path,runtime,title,tmdbid-->
                 <h:form id="menubar" style="margin-bottom: 20px">
-                    <p:growl id="messages"/>
                     <p:menubar>
                         <p:menuitem value="Mainpage" outcome="/mainpage.xhtml"/>
                         <p:submenu label="My Lists" icon="ui-icon-document" rendered="#{userlistController.processRequest(request)}">
-                            <p:menuitem value="Watchlist" outcome="/user/watchlist.xhtml"/>
+                            <p:menuitem value="Watchlist" outcome="/user/watchlist.xhtml" disabled="true"/>
                         </p:submenu>
 
                         <f:facet name="options">
@@ -35,6 +34,16 @@
                                 <div class="ui-g">
                                     <div class="ui-g-4" align="center">
                                         <p:graphicImage url="https://image.tmdb.org/t/p/w92#{favmovies.poster_path}"/>
+                                        <div class="ui-g-12">
+                                            <div class="ui-g-6">
+                                                <p:rating value="#{userlistController.rating}" cancel="false" >
+                                                    <p:ajax event="rate" listener="#{userlistController.saveRating(request,favmovies.tmdbId)}"/>
+                                                </p:rating>
+                                            </div>
+                                            <div class="ui-g-6">
+                                                <h:outputText value="Your rating: #{userlistController.returnRating(request, favmovies.tmdbId)}"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="ui-g-8">
                                         <div class="ui-g-12">
