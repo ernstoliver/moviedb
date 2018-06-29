@@ -1,6 +1,7 @@
 package com.reaktorlabs.repository;
 
 import com.reaktorlabs.model.Movie;
+import com.reaktorlabs.model.MovieComment;
 import com.reaktorlabs.model.MovieRating;
 import com.reaktorlabs.model.User;
 import java.math.BigInteger;
@@ -87,5 +88,28 @@ public class UserListRepositoryImpl implements UserListRepository {
         } else {
             return query.getResultList().get(0);
         }
+    }
+
+    @Override
+    public Double returnAvgMovieRating(Movie movie) {
+        TypedQuery<Double> query = manager.createQuery("SELECT AVG(r.rating) FROM MovieRating r WHERE r.movie.id = :movieid",Double.class);
+        query.setParameter("movieid", movie.getId());
+        if (query.getResultList().isEmpty()) {
+            return null;
+        } else {
+           return query.getResultList().get(0);
+        }
+    }
+
+    @Override
+    public void saveMovieComment(MovieComment comment) {
+        manager.persist(comment);
+    }
+
+    @Override
+    public List<MovieComment> returnComments(Long tmdbid) {
+        TypedQuery<MovieComment> query = manager.createQuery("SELECT c FROM MovieComment c WHERE c.tmdbid = :id ORDER BY c.date DESC",MovieComment.class);
+        query.setParameter("id", tmdbid);
+        return query.getResultList();
     }
 }

@@ -152,6 +152,43 @@
                             </p:lightBox>
                         </p:panel>
                     </div>
+                    <div class="ui-g-12">
+                        <p:panel header="Comments">
+                            <h:form id="create">
+                                <p:messages id="msgs" />
+                                <p:inputText value="#{detailController.title}" maxlength="30" placeholder="title" validatorMessage="Incorrect characters" id="title">
+                                    <f:validateRegex pattern="^[0-9a-zA-Z_:?!. ]+$"/>
+                                </p:inputText>
+                                <br/>
+                                <p:inputTextarea rows="5" cols="30" counter="display" maxlength="300" counterTemplate="{0} characters remaining." autoResize="false" value="#{detailController.comment}" validatorMessage="Incorrect characters" id="text">
+                                    <f:validateRegex pattern="^[0-9a-zA-Z_:?!. ]+$"/>
+                                </p:inputTextarea>
+                                <br/>
+                                <h:outputText id="display" />
+                                <br/>
+                                <p:commandButton action="#{detailController.saveComment(detailController.tmdbId)}" value="Save" disabled="#{!userlistController.processRequest(request)}" update="create comments"/>
+                                <br/>
+                                <p:link value="You must be logged in to comment" outcome="/login.xhtml" rendered="#{userlistController.processRequest(request) != true}" style="color: red"/>
+                            </h:form>
+                            <h:form id="comments">
+                                <ui:repeat var="comments" value="#{detailController.returnComments(detailController.tmdbId)}">
+                                    <hr/>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            User: #{comments.user.userName} wrote on #{comments.date}
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">#{comments.title}</h5>
+                                            <p class="card-text">#{comments.comment}</p>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Discussion on movie #{detailController.movie.title}
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </h:form>
+                        </p:panel>
+                    </div>
                 </div>
             </h:body>
         </ui:define>

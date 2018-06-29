@@ -37,11 +37,13 @@
                                         <div class="ui-g-12">
                                             <div class="ui-g-6">
                                                 <p:rating value="#{userlistController.rating}" cancel="false" >
-                                                    <p:ajax event="rate" listener="#{userlistController.saveRating(request,favmovies.tmdbId)}"/>
+                                                    <p:ajax event="rate" listener="#{userlistController.saveRating(request,favmovies.tmdbId)}" update="rating avgrating"/>
                                                 </p:rating>
                                             </div>
                                             <div class="ui-g-6">
-                                                <h:outputText value="Your rating: #{userlistController.returnRating(request, favmovies.tmdbId)}"/>
+                                                <h:outputText value="Your rating: #{userlistController.returnRating(request,favmovies.tmdbId)}" id="rating"/>
+                                                <br/>
+                                                <h:outputText value="Average: #{userlistController.returnAvgRating(favmovies.tmdbId)}" id="avgrating"/>
                                             </div>
                                         </div>
                                     </div>

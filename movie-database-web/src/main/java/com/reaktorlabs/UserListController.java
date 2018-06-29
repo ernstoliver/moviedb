@@ -3,6 +3,7 @@ package com.reaktorlabs;
 import com.reaktorlabs.list.UserListService;
 import com.reaktorlabs.model.Movie;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -54,6 +55,14 @@ public class UserListController implements Serializable {
     
     public Integer returnRating(HttpServletRequest request,Long tmdbid) {
         return service.returnUserRating(getLoggedinUserName(request), tmdbid);
+    }
+    
+    public String returnAvgRating(Long tmdbid) {
+        if (service.returnAvgRating(tmdbid) != null) {
+            DecimalFormat df = new DecimalFormat("#.#");
+            return df.format(service.returnAvgRating(tmdbid));
+        }
+        return null;
     }
     
     public boolean processRequest(HttpServletRequest request) {

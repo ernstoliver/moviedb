@@ -1,6 +1,7 @@
 package com.reaktorlabs.repository;
 
 import com.reaktorlabs.model.Movie;
+import com.reaktorlabs.model.MovieComment;
 import com.reaktorlabs.model.MovieRating;
 import com.reaktorlabs.model.User;
 import java.util.List;
@@ -18,4 +19,7 @@ public interface UserListRepository {
     List<Movie> loadUserFavourites(String username);
     void saveRating(MovieRating rating);
     Integer returnUserRating(User user,Movie movie);
+    Double returnAvgMovieRating(Movie movie);
+    void saveMovieComment(MovieComment comment);
+    List<MovieComment> returnComments(Long tmdbid);
 }

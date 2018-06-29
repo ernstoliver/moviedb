@@ -91,5 +91,11 @@ public class UserListServiceImpl implements UserListService {
         User user = repository.getUserFromDatabase(username);
         return repository.returnUserRating(user, movie);
     }
+
+    @Override
+    public Double returnAvgRating(Long tmdbid) {
+        Movie movie = repository.getMovieFromDatabase(tmdbid).get(0);
+        return repository.returnAvgMovieRating(movie);
+    }
     
 }

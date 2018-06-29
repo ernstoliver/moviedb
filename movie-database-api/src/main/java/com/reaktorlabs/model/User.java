@@ -35,6 +35,8 @@ public class User implements Serializable {
     private List<Movie> movies = new ArrayList<>();
     @OneToMany(mappedBy = "app_user")
     private List<MovieRating> ratings = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<MovieComment> comments = new ArrayList<>();
 
     
     public User() {
@@ -88,5 +90,12 @@ public class User implements Serializable {
     public void setRatings(List<MovieRating> ratings) {
         this.ratings = ratings;
     }
-    
+
+    public List<MovieComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<MovieComment> comments) {
+        this.comments = comments;
+    }
 }

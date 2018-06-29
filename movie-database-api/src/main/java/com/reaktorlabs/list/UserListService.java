@@ -15,4 +15,5 @@ public interface UserListService {
     void removeFromFavs(String username,Long tmdbid);
     void saveUserRating(String username,Long tmdbid,Integer rating);
     Integer returnUserRating(String username,Long tmdbid);
+    Double returnAvgRating(Long tmdbid);
 }

@@ -1,8 +1,11 @@
 com\reaktorlabs\util\HashUtil.class
 com\reaktorlabs\search\TitleSearchProcess.class
 com\reaktorlabs\repository\UserListRepositoryImpl.class
+com\reaktorlabs\search\NowPlayingSearchImpl.class
 com\reaktorlabs\auth\UserRepositoryImpl.class
+com\reaktorlabs\search\ActorSearchImpl.class
 com\reaktorlabs\search\HttpRequestService.class
 com\reaktorlabs\list\UserListServiceImpl.class
 com\reaktorlabs\search\DetailSearchProcess.class
+com\reaktorlabs\comparator\FilmTitleComparator.class
 com\reaktorlabs\auth\AuthService.class

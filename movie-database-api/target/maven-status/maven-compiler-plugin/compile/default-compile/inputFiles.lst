@@ -10,5 +10,7 @@ C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\
 C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\list\UserListService.java
 C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\search\NowPlayingSearch.java
 C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\model\Movie.java
+C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\model\MovieComment.java
 C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\search\MovieSearchDetail.java
+C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\comment\CommentService.java
 C:\Users\ernst\Documents\NetBeansProjects\movie-database\movie-database-api\src\main\java\com\reaktorlabs\model\MovieRating.java
