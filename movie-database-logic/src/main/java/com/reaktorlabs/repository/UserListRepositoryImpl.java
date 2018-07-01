@@ -4,8 +4,6 @@ import com.reaktorlabs.model.Movie;
 import com.reaktorlabs.model.MovieComment;
 import com.reaktorlabs.model.MovieRating;
 import com.reaktorlabs.model.User;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -53,23 +51,9 @@ public class UserListRepositoryImpl implements UserListRepository {
 
     @Override
     public List<Movie> loadUserFavourites(String username) {
-        Query query = manager.createNativeQuery("select movie.id,imdb_id,poster_path,runtime,title,tmdbid from public.movie inner join public.user_favourite on movie.id = user_favourite.movie_id inner join public.app_user on app_user.id = user_favourite.user_id where app_user.username = ?;");
-        query.setParameter(1, username);
-        List<Object[]> results = query.getResultList();
-        List<Movie> favlist = new ArrayList<>();
-        for(Object[] movie : results) {
-            Movie newMovie = new Movie();
-            BigInteger bigint = (BigInteger) movie[0];
-            newMovie.setId(bigint.longValue());
-            newMovie.setImdb_id((String) movie[1]);
-            newMovie.setPoster_path((String) movie[2]);
-            newMovie.setRuntime((Integer) movie[3]);
-            newMovie.setTitle((String) movie[4]);
-            BigInteger bigint2 = (BigInteger) movie[5];
-            newMovie.setTmdbId(bigint2.longValue());
-            favlist.add(newMovie);
-        }
-        return favlist;
+        TypedQuery<Movie> query = manager.createQuery("SELECT m FROM Movie m JOIN m.users u WHERE u.userName = :uname",Movie.class);
+        query.setParameter("uname", username);
+        return query.getResultList();
     }
 
     @Override
