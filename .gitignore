@@ -1,0 +1,6 @@
+/moviedb/movie-database-api/target/
+/moviedb/movie-database-logic/target/
+/moviedb/movie-database-web/target/
+/moviedb/movie-database-ear/target/
+/moviedb/movie-database-api/nb-configuration
+/moviedb/movie-database-web/nb-configuration
