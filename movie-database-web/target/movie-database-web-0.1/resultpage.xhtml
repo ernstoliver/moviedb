@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="head">
+            <h:head>
+                <title>Result of search</title>
+            </h:head>
+        </ui:define>
+        <ui:define name="body">
+            <h:body>
+                <p:accordionPanel value="#{resultListController.movies}" var="list">
+                    <p:tab title="#{list.title}">
+                        <div class="ui-g-4" align="center">
+                            <p:graphicImage url="https://image.tmdb.org/t/p/w185#{list.poster_path}"/>
+                        </div>
+                        <div class="ui-g-8 ui-g-nopad">
+                            <div class="ui-g-6">
+                                <h:outputLabel value="Released: "/>
+                                <h:outputText value= "#{list.release_date}"/>
+                                <br/>
+                                <h:outputLabel value="TmdbID: "/>
+                                <h:outputText value="#{list.tmdbId}"/>
+                            </div>
+                            <div class="ui-g-6">
+                                Source: The Movie Database API (tmdb.org)
+                            </div>
+                            <div class="ui-g-12">
+                                <p:panel id="descr" header="Description">
+                                    <h:outputText value= "#{list.overview}"/>
+                                    <br/>
+                                    <p:link value="Additional information" outcome="/detailpage.xhtml">
+                                        <f:param name="movieId" value="#{list.tmdbId}"/>
+                                    </p:link>
+                                </p:panel>
+                            </div>
+                        </div>
+
+                    </p:tab>
+                </p:accordionPanel>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>
